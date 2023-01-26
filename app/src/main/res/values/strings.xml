@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Bookish Dreamer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log in</string>
+    <string name="register">Register</string>
+    <string name="search_for_books">Search for Books</string>
+    <string name="profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="favorites">Favorites</string>
+    <string name="cancel">Cancel</string>
+    <string name="please_enter_page_number">Please Enter Page Number</string>
+    <string name="add">Add</string>
+    <string name="delete">Delete</string>
+
+</resources>
