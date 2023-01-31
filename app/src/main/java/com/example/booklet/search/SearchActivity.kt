@@ -54,13 +54,13 @@ class SearchActivity : AppCompatActivity() {
         }
 
         btn.setOnClickListener {
-            val wow = arrayListOf<VolumeInfo>()
+            val volumeInfos = arrayListOf<VolumeInfo>()
             scope.launch {
                 viewModel.getMyData(search.text.toString()).collect {
                     if (it != null) {
                         for (i in it.items) {
-                            wow.add(i.volumeInfo)
-                            listadapter(wow)
+                            volumeInfos.add(i.volumeInfo)
+                            listadapter(volumeInfos)
                         }
                         Log.d("TAG", "onCreate: ${it.totalItems}")
                     } else {
@@ -71,6 +71,7 @@ class SearchActivity : AppCompatActivity() {
                         ).show()
                         Log.d("TAG", "onCreate: ")
                     }
+
                 }
             }
 
@@ -79,8 +80,8 @@ class SearchActivity : AppCompatActivity() {
 
     }
 
-    fun listadapter(wow: List<VolumeInfo>) {
-        adapter = BookAdapter(wow)
+    fun listadapter(volumeInfos: List<VolumeInfo>) {
+        adapter = BookAdapter(volumeInfos)
         val count = adapter.itemCount
         list.adapter = adapter
         Log.d("Item Count", "$count")

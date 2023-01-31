@@ -4,11 +4,15 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.booklet.api.APInterface
 import com.example.booklet.Dataclass.Books
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
 class SearchViewModel : ViewModel() {
+
+    private val scope = CoroutineScope(Dispatchers.IO)
 
     private val retrofitBuilder = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
@@ -16,7 +20,7 @@ class SearchViewModel : ViewModel() {
         .build()
         .create(APInterface::class.java)
 
-    fun getMyData(query: String) = flow {
+        fun getMyData(query: String) = flow {
 //        var myStringBuilder= Books()
 
         Log.d("TAG", "getMyData: ")
@@ -31,7 +35,6 @@ class SearchViewModel : ViewModel() {
         }
 
     }
-
 
 
     companion object {

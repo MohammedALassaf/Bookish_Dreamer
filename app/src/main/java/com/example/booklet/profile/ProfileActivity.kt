@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.ViewModelProvider
 import com.example.booklet.database.BookDB
 import com.example.booklet.R
 import com.example.booklet.favorites.FavoritesActivity
@@ -16,21 +17,18 @@ class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+        val viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
         val bottomnav = findViewById<BottomNavigationView>(R.id.bottomnav)
         val page = findViewById<TextView>(R.id.pagescount)
         val finish = findViewById<TextView>(R.id.booksfinished)
         val book = findViewById<TextView>(R.id.bookscount)
-        val bookscount = db.getBooks()
-        var pagescount = 0
-        var booksFinished = 0
-        for (i in bookscount) {
-            pagescount += i.page
-            if (i.page == i.stop)
-                booksFinished++
-        }
-        finish.text = "Books Finished: $booksFinished"
-        page.text = "Pages count: ${pagescount.toString()}"
-        book.text = "Books count: ${bookscount.size}"
+        viewModel.initDB(db)
+
+        finish.text = "Books Finished: ${viewModel.booksFinished()}"
+        page.text = "Pages count: ${viewModel.getPages()}"
+        book.text = "Books count: ${viewModel.getAll()}"
+
+
         bottomnav.selectedItemId = R.id.profilemenu
         bottomnav.setOnItemSelectedListener {
             when (it.itemId) {

@@ -42,6 +42,7 @@ class BookVH(view: View) : RecyclerView.ViewHolder(view) {
                 isbn = i.identifier
         root.setOnClickListener {
             val context = root.context
+
             val builder = AlertDialog.Builder(context)
             val book = BookDC(
                 isbn = isbn.toLong(),
